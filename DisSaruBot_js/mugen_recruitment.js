@@ -6,7 +6,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 const token = '';
 
 // 送信するチャンネルのID
-const channelId = '644877926290161707';
+const channelId = '';
 
 // 毎日送信する時間（24時間表記の時刻）
 const sendTime = '17:30:00';
