@@ -43,10 +43,22 @@ function sendDailyMessage() {
     const dateString = now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2);
 
     // メッセージの送信
-    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n21:00~23:00")
-        .then(() => console.log(`Sent message for ${dateString}`))
+    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n9:00~11:00")
+        .then(() => console.log(`Sent message for ${dateString + "9:00~11:00"}`))
         .catch((error) => console.error(`Error sending message: ${error}`));
-}
+    
+    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n13:30~15:30")
+        .then(() => console.log(`Sent message for ${dateString + "13:30~15:30"}`))
+        .catch((error) => console.error(`Error sending message: ${error}`));
+    
+    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n16:00~18:00")
+        .then(() => console.log(`Sent message for ${dateString + "16:00~18:00"}`))
+        .catch((error) => console.error(`Error sending message: ${error}`));
+
+    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n22:00~24:00")
+        .then(() => console.log(`Sent message for ${dateString + "22:00~24:00"}`))
+        .catch((error) => console.error(`Error sending message: ${error}`));
+    }
 
 // ボットのログイン
 client.login(token);
