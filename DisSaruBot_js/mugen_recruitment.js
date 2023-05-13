@@ -37,7 +37,7 @@ function scheduleDailyMessage(hour, minute) {
 }
 
 // ログインする
-client.login('MTEwMzkwNDQ2NDQyOTEyMTU5Ng.GIqoRq.-NjzpMWGFl1k6SgXFTcxem0r2FKr-XfqlPg6y4');
+client.login('');
 
 // メッセージを送信時刻設定
 scheduleDailyMessage(17, 20);
