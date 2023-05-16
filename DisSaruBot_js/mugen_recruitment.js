@@ -39,12 +39,16 @@ client.on('ready', () => {
 
 // メッセージを送信する処理
 function sendDailyMessage() {
-    const now = new Date();
-    const dateString = now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2);
+    const tomorrow = new Date();
+    tomorrow.setDate(new Date().getDate() + 1);
+    const year = tomorrow.getFullYear();
+    const month = tomorrow.getMonth() + 1;
+    const day = tomorrow.getDate();
+    const formattedDate = `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
 
     // メッセージの送信
-    client.channels.cache.get(channelId).send(dateString + " ムゲン放置狩り\r\n21:00~23:00")
-        .then(() => console.log(`Sent message for ${dateString}`))
+    client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り \r\n21:00~23:00")
+        .then(() => console.log(`Sent message for ${formattedDate}`))
         .catch((error) => console.error(`Error sending message: ${error}`));
 }
 
