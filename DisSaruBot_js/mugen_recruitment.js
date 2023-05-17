@@ -46,10 +46,12 @@ function sendDailyMessage() {
     const day = tomorrow.getDate();
     const formattedDate = `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
 
-    // メッセージの送信
-    client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り \r\n21:00~23:00")
-        .then(() => console.log(`Sent message for ${formattedDate}`))
-        .catch((error) => console.error(`Error sending message: ${error}`));
+    for (let i = 1; i < 3; i++) {
+        // メッセージの送信
+        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り" + i + "枠目\r\n21:00~23:00")
+            .then(() => console.log(`Sent message for ${formattedDate}`))
+            .catch((error) => console.error(`Error sending message: ${error}`));
+    }
 }
 
 // ボットのログイン
