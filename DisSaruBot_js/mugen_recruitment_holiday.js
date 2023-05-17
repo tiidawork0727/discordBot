@@ -49,19 +49,19 @@ function sendDailyMessage() {
     for (let i = 1; i < 3; i++) {
         // メッセージの送信
         client.channels.cache.get(channelId).send(formattedDate + "@everyone\r\nムゲン放置狩り" + i + "枠目\r\n13:30~15:30")
-            .then(() => console.log(`Sent message for ${formattedDate + " 13:30~15:30"}`))
+            .then(() => console.log(`Sent message for ${formattedDate + i + "枠目 13:30~15:30"}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
 
         client.channels.cache.get(channelId).send(formattedDate + "@everyone\r\nムゲン放置狩り" + i + "枠目\r\n16:00~18:00")
-            .then(() => console.log(`Sent message for ${formattedDate + " 16:00~18:00"}`))
+            .then(() => console.log(`Sent message for ${formattedDate + i + "枠目 16:00~18:00"}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
 
         client.channels.cache.get(channelId).send(formattedDate + "@everyone\r\nムゲン放置狩り" + i + "枠目\r\n19:30~21:30")
-            .then(() => console.log(`Sent message for ${formattedDate + " 19:30~21:30"}`))
+            .then(() => console.log(`Sent message for ${formattedDate + i + "枠目 19:30~21:30"}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
 
         client.channels.cache.get(channelId).send(formattedDate + "@everyone\r\nムゲン放置狩り" + i + "枠目\r\n22:00~24:00")
-            .then(() => console.log(`Sent message for ${formattedDate + " 22:00~24:00"}`))
+            .then(() => console.log(`Sent message for ${formattedDate + i + "枠目 22:00~24:00"}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
     }
 }
