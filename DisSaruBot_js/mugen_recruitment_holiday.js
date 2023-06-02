@@ -46,29 +46,20 @@ function sendDailyMessage() {
     const day = tomorrow.getDate();
     const formattedDate = `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
 
-    for (let i = 1; i < 4; i++) {
-        // メッセージの送信
-        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り" + i + "枠目\r\n13:30~15:30")
-            .then(() => console.log(`Sent message for ${formattedDate + " 13:30~15:30"}`))
-            .catch((error) => console.error(`Error sending message: ${error}`));
-    }
+    // 重複したメッセージをまとめる
+    const messageWork = "@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り";
+    // 繰り返しになりそうなメッセージを配列にする（0から始まる）
+    const messageList = ["枠目\r\n13:30~15:30", "枠目\r\n16:00~18:00", "枠目\r\n19:30~21:30", "枠目\r\n22:00~24:00"];
 
-    for (let i = 1; i < 4; i++) {
-        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り" + i + "枠目\r\n16:00~18:00")
-            .then(() => console.log(`Sent message for ${formattedDate + " 16:00~18:00"}`))
+    // 送信するメッセージの管理（時間帯を管理）
+    for (let i = 0; i < 4; i++) {
+        // 枠数の管理
+        for (let j = 1; j < 4; j++) {
+            // メッセージの送信
+            client.channels.cache.get(channelId).send(messageWork + j + messageList[i])
+            .then(() => console.log(`Sent message for\r\n${messageWork + j + messageList[i]}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
-    }
-
-    for (let i = 1; i < 4; i++) {
-        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り" + i + "枠目\r\n19:30~21:30")
-            .then(() => console.log(`Sent message for ${formattedDate + " 19:30~21:30"}`))
-            .catch((error) => console.error(`Error sending message: ${error}`));
-    }
-
-    for (let i = 1; i < 4; i++) {
-        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り" + i + "枠目\r\n22:00~24:00")
-            .then(() => console.log(`Sent message for ${formattedDate + " 22:00~24:00"}`))
-            .catch((error) => console.error(`Error sending message: ${error}`));
+        }
     }
 }
 
