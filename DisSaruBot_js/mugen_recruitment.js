@@ -47,10 +47,16 @@ function sendDailyMessage() {
     const formattedDate = `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
 
     for (let i = 1; i < 3; i++) {
-        // メッセージの送信
+        // 2時間枠メッセージの送信
         client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り" + i + "枠目\r\n21:00~23:00")
             .then(() => console.log(`Sent message for ${formattedDate}`))
             .catch((error) => console.error(`Error sending message: ${error}`));
+        if (i == 2) {
+            // 1時間枠メッセージの送信
+            client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り1時間枠\r\n22:00~23:00")
+            .then(() => console.log(`Sent message for ${formattedDate}`))
+            .catch((error) => console.error(`Error sending message: ${error}`));
+        }
     }
 }
 
