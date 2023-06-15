@@ -54,7 +54,7 @@ function sendDailyMessage() {
     // 送信するメッセージの管理（時間帯を管理）
     for (let i = 0; i < 5; i++) {
         // 枠数の管理
-        for (let j = 1; j < 4; j++) {
+        for (let j = 1; j < 3; j++) {
             // メッセージの送信
             sendMessage(messageWork,messageList[i],j);
         }
