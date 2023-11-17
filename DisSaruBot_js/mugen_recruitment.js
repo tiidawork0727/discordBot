@@ -46,18 +46,26 @@ function sendDailyMessage() {
     const day = tomorrow.getDate();
     const formattedDate = `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
 
-    for (let i = 1; i < 3; i++) {
-        // 2時間枠メッセージの送信
-        client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り" + i + "枠目\r\n21:00~23:00")
-            .then(() => console.log(`Sent message for ${formattedDate}`))
-            .catch((error) => console.error(`Error sending message: ${error}`));
-        if (i == 2) {
-            // 1時間枠メッセージの送信
-            client.channels.cache.get(channelId).send("@everyone\r\n" + formattedDate + " ムゲン放置狩り1時間枠\r\n22:00~23:00")
-            .then(() => console.log(`Sent message for ${formattedDate}`))
-            .catch((error) => console.error(`Error sending message: ${error}`));
+    // 重複したメッセージをまとめる
+    const messageWork = "@everyone\r\n" + formattedDate + "\r\nムゲン放置狩り";
+    // 繰り返しになりそうなメッセージを配列にする（0から始まる）
+    const messageList = ["枠目\r\n21:00~23:00", "枠目\r\n22:00~23:00"];
+
+        // 送信するメッセージの管理（時間帯を管理）
+    for (let i = 0; i < 2; i++) {
+        // 枠数の管理
+        for (let j = 1; j < 5; j++) {
+            // メッセージの送信
+            sendMessage(messageWork,messageList[i],j);
         }
     }
+}
+
+// メッセージ送信
+function sendMessage(messageWork, messageList, j) {
+    client.channels.cache.get(channelId).send(messageWork + j + messageList)
+    .then(() => console.log(`Sent message for\r\n${messageWork + j + messageList}`))
+    .catch((error) => console.error(`Error sending message: ${error}`));
 }
 
 // ボットのログイン
