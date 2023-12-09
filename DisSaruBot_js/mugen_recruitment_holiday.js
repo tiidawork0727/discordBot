@@ -6,35 +6,34 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 const token = '';
 
 // 送信するチャンネルのID
-const channelId = '';
+var channelId = '';
 
 // 毎日送信する時間（24時間表記の時刻）
 const sendTime = '16:50:00';
+
+// コマンドライン引数を取得
+const args = process.argv.slice(2);
+
+// 引数があるかどうかを確認
+if (args.length > 0) {
+    console.log("渡された引数:", args);
+    channelId = args.toString()
+  } else {
+    console.log("引数がありません。");
+  }
 
 // ボットがログインした時に実行される処理
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    // 指定した時刻にメッセージを送信するための処理
-    const now = new Date();
-    const timeToSend = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        sendTime.split(':')[0],
-        sendTime.split(':')[1],
-        sendTime.split(':')[2]
-    );
+    // メッセージ送信
+    sendDailyMessage();
 
-    const timeUntilSend = timeToSend.getTime() - now.getTime();
-    if (timeUntilSend < 0) {
-        timeToSend.setDate(timeToSend.getDate() + 1);
-    }
-
+    // 1分後に終了するように設定
     setTimeout(() => {
-        sendDailyMessage();
-        setInterval(sendDailyMessage, 24 * 60 * 60 * 1000);
-    }, timeUntilSend);
+        console.log('Program will exit after 0.5 minute.');
+        process.exit();
+    }, 30 * 1000);
 });
 
 // メッセージを送信する処理
